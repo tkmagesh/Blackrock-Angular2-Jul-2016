@@ -66,20 +66,48 @@
 			
 		}
 
-		function SalaryCalculatorView(calculator, $root){
-			$("#txtBasic", $root).change(function(){
+		function SalaryCalculatorView(calculator){
+			var $root = this.$root = $("<div></div>");
+
+			this.template = `<section class="content" id="view1">
+		<div class="field">
+			<label for="">Basic :</label>
+			<input type="text" name="" id="txtBasic">
+		</div>
+		<div class="field">
+			<label for="">HRA :</label>
+			<input type="text" name="" id="txtHra">
+		</div>
+		<div class="field">
+			<label for="">DA :</label>
+			<input type="text" name="" id="txtDa">
+		</div>
+		<div class="field">
+			<label for="">Tax :</label>
+			<input type="range" name="" id="rangeTax" min="0" max="30" value="0">
+			<span id="spanTax">[Tax %]</span>
+		</div>
+		<div class="field">
+			<input type="button" value="Calculate" id="btnCalculate">
+		</div>
+		<div class="field">
+			<div id="divResult">[Salary]</div>
+		</div>
+	</section>`;
+
+			$root.on('change', "#txtBasic", function(){
 				calculator.set('basic', $("#txtBasic").val().toInt());
 			});
-			$("#txtHra", $root).change(function(){
+			$root.on('change', "#txtHra", function(){
 				calculator.set('hra', $("#txtHra").val().toInt());
 			});
-			$("#txtDa", $root).change(function(){
+			$root.on('change', "#txtDa", function(){
 				calculator.set('da', $("#txtDa").val().toInt());
 			});
-			$("#rangeTax", $root).change(function(){
+			$root.on('change', "#rangeTax", function(){
 				calculator.set('tax', $("#rangeTax").val().toInt());
 			});
-			$("#btnCalculate", $root).click(function(){
+			$root.on('click', "#btnCalculate", function(){
 				calculator.calculate();
 			});
 
@@ -102,11 +130,15 @@
 			calculator.onChange('salary', function(){
 				$("#divResult", $root).html(calculator.get('salary'));
 			});
+
+			this.render = function(){
+				$root.html(this.template);
+			}
 		}
 		$(document).ready(function(){
 			window.calculator = new SalaryCalculator();
-			window.calculatorView1 = new SalaryCalculatorView(calculator, $("#view1"));
-			window.calculatorView2 = new SalaryCalculatorView(calculator, $("#view2"));
+			/*window.calculatorView1 = new SalaryCalculatorView(calculator, $("#view1"));
+			window.calculatorView2 = new SalaryCalculatorView(calculator, $("#view2"));*/
 			
 			
 		});
@@ -114,56 +146,7 @@
 </head>
 <body>
 	<h1>Salary Calculator</h1>
-	<section class="content" id="view1">
-		<div class="field">
-			<label for="">Basic :</label>
-			<input type="text" name="" id="txtBasic">
-		</div>
-		<div class="field">
-			<label for="">HRA :</label>
-			<input type="text" name="" id="txtHra">
-		</div>
-		<div class="field">
-			<label for="">DA :</label>
-			<input type="text" name="" id="txtDa">
-		</div>
-		<div class="field">
-			<label for="">Tax :</label>
-			<input type="range" name="" id="rangeTax" min="0" max="30" value="0">
-			<span id="spanTax">[Tax %]</span>
-		</div>
-		<div class="field">
-			<input type="button" value="Calculate" id="btnCalculate">
-		</div>
-		<div class="field">
-			<div id="divResult">[Salary]</div>
-		</div>
-	</section>
-	<hr>
-	<section class="content" id="view2">
-		<div class="field">
-			<label for="">Basic :</label>
-			<input type="text" name="" id="txtBasic">
-		</div>
-		<div class="field">
-			<label for="">HRA :</label>
-			<input type="text" name="" id="txtHra">
-		</div>
-		<div class="field">
-			<label for="">DA :</label>
-			<input type="text" name="" id="txtDa">
-		</div>
-		<div class="field">
-			<label for="">Tax :</label>
-			<input type="range" name="" id="rangeTax" min="0" max="30" value="0">
-			<span id="spanTax">[Tax %]</span>
-		</div>
-		<div class="field">
-			<input type="button" value="Calculate" id="btnCalculate">
-		</div>
-		<div class="field">
-			<div id="divResult">[Salary]</div>
-		</div>
-	</section>
+	
+	
 </body>
 </html>
