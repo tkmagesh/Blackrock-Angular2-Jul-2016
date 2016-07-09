@@ -140,7 +140,14 @@
 			/*window.calculatorView1 = new SalaryCalculatorView(calculator, $("#view1"));
 			window.calculatorView2 = new SalaryCalculatorView(calculator, $("#view2"));*/
 			
-			
+			window.view1 = new SalaryCalculatorView(calculator);
+			view1.render();
+			view1.$root.appendTo(document.body);
+
+
+			window.view2 = new SalaryCalculatorView(calculator);
+			view2.render();
+			view2.$root.appendTo(document.body);
 		});
 	</script>
 </head>
