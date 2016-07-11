@@ -1,0 +1,24 @@
+<h1>Bug Tracker</h1>
+<hr>
+<section class="edit">
+	<label for="">Bug :</label>
+	<input type="text" #txtBugName>
+	<input type="button" value="Add New" (click)="onAddClick(txtBugName)">
+</section>
+<section class="stats">
+	<span class="closed">{{getClosedCount()}}</span>
+	<span>/</span>
+	<span>{{bugs.length}}</span>
+</section>
+<section class="list">
+	<div *ngIf="bugs.length === 0">
+		<div>All Clear..!!  No bugs found!!!</div>
+	</div>
+	<ol>
+		<li 
+			*ngFor="let bug of bugs" 
+			(click)="toggleBug(bug)"
+			[ngClass]="{closed : bug.isClosed}"
+		>{{bug | json}}</li>
+	</ol>
+</section>
