@@ -1,35 +1,36 @@
-import {Bug} from '../models/Bug';
+import {IBug} from '../models/Bug';
 import {Inject, Injectable} from '@angular/core';
+import {BugOperations} from './BugOperations';
 
-
+@Injectable()
 export class BugStorage{
 	maxBugId : number = 0;
 
-	constructor(){
+	constructor(@Inject(BugOperations) public bugOperations : BugOperations){
 
 	}
-	getAll() : Array<Bug> {
-		let result : Array<Bug> = [];
+	getAll() : Array<IBug> {
+		let result : Array<IBug> = [];
 		for(let i=0; i<localStorage.length; i++){
 			var dataAsString = localStorage.getItem(localStorage.key(i));
-			var bugData = JSON.parse(dataAsString);
-			var newBug = new Bug(bugData.id, bugData.name, bugData.isClosed, bugData.createdAt);
+			var newBug = JSON.parse(dataAsString);
 			this.maxBugId = this.maxBugId > newBug.id ? this.maxBugId : newBug.id;
 			result.push(newBug);
 		}
 		return result;
 	}
-	addNew(bugName : string) : Bug{
+	addNew(bugName : string) : IBug{
 		var newId = ++this.maxBugId;
-		var newBug = new Bug(newId, bugName, false)
+		var newBug =  this.bugOperations.create(newId, bugName)
 		window.localStorage.setItem(newId.toString(), JSON.stringify(newBug));
 		return newBug;
 		
 	}
-	save(bug : Bug) :void {
+	toggle(bug : IBug) :void {
+		this.bugOperations.toggle(bug);
 		window.localStorage.setItem(bug.id.toString(), JSON.stringify(bug));
 	}
-	remove(bug : Bug) : void{
+	remove(bug : IBug) : void{
 		window.localStorage.removeItem(bug.id.toString());
 	}
 		

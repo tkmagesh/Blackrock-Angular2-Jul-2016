@@ -9,25 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var BugStorage_1 = require('../services/BugStorage');
-var BugStat = (function () {
-    function BugStat(bugStorage) {
-        this.bugStorage = bugStorage;
-        this.count = 0;
+var BugStats = (function () {
+    function BugStats() {
+        this.list = [];
     }
-    BugStat.prototype.displayCount = function () {
-        console.log(this.bugStorage);
-        this.count = this.bugStorage.maxBugId;
+    BugStats.prototype.getClosedCount = function () {
+        return this.list.reduce(function (result, bug) { return bug.isClosed ? ++result : result; }, 0);
     };
-    BugStat = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BugStats.prototype, "list", void 0);
+    BugStats = __decorate([
         core_1.Component({
-            selector: 'bug-stat',
-            template: "<div>{{count}}</div>\n<input type=\"button\" value=\"Display Count\" (click)=\"displayCount()\">",
-            providers: [BugStorage_1.BugStorage]
+            selector: 'bug-stats',
+            template: "<section class=\"stats\">\n\t<span class=\"closed\">{{getClosedCount()}}</span>\n\t<span>/</span>\n\t<span>{{list.length}}</span>\n</section>"
         }), 
-        __metadata('design:paramtypes', [BugStorage_1.BugStorage])
-    ], BugStat);
-    return BugStat;
+        __metadata('design:paramtypes', [])
+    ], BugStats);
+    return BugStats;
 }());
-exports.BugStat = BugStat;
-//# sourceMappingURL=bugStorageStat.component.js.map
+exports.BugStats = BugStats;
+//# sourceMappingURL=BugStats.component.js.map

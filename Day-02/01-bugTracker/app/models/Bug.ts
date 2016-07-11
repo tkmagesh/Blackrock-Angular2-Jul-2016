@@ -12,7 +12,7 @@ export interface IBug{
 	name : string;
 	isClosed : boolean;
 	createdAt : Date;
-	toggle() : void;
+	
 }
 
 export class Bug implements IBug{

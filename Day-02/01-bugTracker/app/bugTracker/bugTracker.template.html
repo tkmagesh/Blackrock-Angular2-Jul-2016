@@ -6,11 +6,9 @@
 	<input type="button" value="Add New" (click)="onAddClick(txtBugName)">
 	<input type="button" value="Remove Closed" (click)= "onRemoveClosedClick()">
 </section>
-<section class="stats">
-	<span class="closed">{{getClosedCount()}}</span>
-	<span>/</span>
-	<span>{{bugs.length}}</span>
-</section>
+
+<bug-stats [list]="bugs"></bug-stats>
+
 <section class="list">
 	<div *ngIf="bugs.length === 0">
 		<div>All Clear..!!  No bugs found!!!</div>

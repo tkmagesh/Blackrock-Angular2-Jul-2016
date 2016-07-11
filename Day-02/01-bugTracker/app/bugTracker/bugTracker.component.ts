@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {IBug, Bug} from '../models/Bug';
 import {BugStorage} from '../services/BugStorage';
+import {BugStats} from './bug-stats/BugStats.component';
 
 
 @Component({
@@ -8,7 +9,7 @@ import {BugStorage} from '../services/BugStorage';
 	selector : 'bug-tracker',
 	styleUrls : ['./app/bugTracker/bugTracker.style.css'],
 	providers : [BugStorage] ,
-	directives : []
+	directives : [BugStats]
 	
 })
 export class BugTracker{
@@ -29,12 +30,10 @@ export class BugTracker{
 	}
 
 	toggleBug(bug : Bug){
-		bug.toggle();
-		this.bugStorage.save(bug);
+		
+		this.bugStorage.toggle(bug);
 	}
-	getClosedCount(){
-		return this.bugs.reduce((result, bug) => bug.isClosed ? ++result : result, 0);
-	}
+	
 
 	onRemoveClosedClick(){
 		for(let i=this.bugs.length-1; i>=0; i--)
