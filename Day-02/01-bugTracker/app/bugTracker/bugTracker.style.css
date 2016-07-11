@@ -1,16 +1,16 @@
-.closed{
+/deep/ .closed{
 	color : red !important;
 	text-decoration: line-through;
 	font-style: italic;
 	font-weight: bold;
 }
 
-ol{
+/deep/ ol{
 	list-style: none;
 	width: 400px;
 	-webkit-padding-start: 0px;
 }
-li{
+/deep/ li{
 	border : 1px solid gray;
 	background-color: #e7e7e7;
 	margin-bottom: 5px;
@@ -19,11 +19,11 @@ li{
 	cursor: pointer;
 }
 
-.bugname{
+/deep/ .bugname{
 	font-size: 18pt;
 	color : black;
 }
-.datetime{
+/deep/ .datetime{
 	font-style: italic;
 	font-size: small;
 }

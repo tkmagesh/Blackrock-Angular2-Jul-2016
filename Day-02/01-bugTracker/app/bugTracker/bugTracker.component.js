@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var BugStorage_1 = require('../services/BugStorage');
 var BugStats_component_1 = require('./bug-stats/BugStats.component');
+var BugList_component_1 = require('./bug-list/BugList.component');
+var BugEdit_component_1 = require('./bug-edit/BugEdit.component');
 var BugTracker = (function () {
     function BugTracker(bugStorage) {
         this.bugStorage = bugStorage;
@@ -19,18 +21,15 @@ var BugTracker = (function () {
     BugTracker.prototype.ngOnInit = function () {
         this.bugs = this.bugStorage.getAll();
     };
-    BugTracker.prototype.onAddClick = function (txtBugName) {
-        var bugName = txtBugName.value;
-        txtBugName.value = '';
-        this.bugs.push(this.bugStorage.addNew(bugName));
+    BugTracker.prototype.onNewBugAddedHandler = function (bugName) {
+        console.log(arguments);
+        var newBug = this.bugStorage.addNew(bugName);
+        this.bugs.push(newBug);
     };
-    BugTracker.prototype.toggleBug = function (bug) {
-        this.bugStorage.toggle(bug);
-    };
-    BugTracker.prototype.onRemoveClosedClick = function () {
+    BugTracker.prototype.onRemoveClosedHandler = function () {
         for (var i = this.bugs.length - 1; i >= 0; i--)
             if (this.bugs[i].isClosed) {
-                this.bugStorage.remove(this.bugs[i]);
+                //this.bugStorage.remove(this.bugs[i]);
                 this.bugs.splice(i, 1);
             }
     };
@@ -40,7 +39,7 @@ var BugTracker = (function () {
             selector: 'bug-tracker',
             styleUrls: ['./app/bugTracker/bugTracker.style.css'],
             providers: [BugStorage_1.BugStorage],
-            directives: [BugStats_component_1.BugStats]
+            directives: [BugStats_component_1.BugStats, BugList_component_1.BugList, BugEdit_component_1.BugEdit]
         }), 
         __metadata('design:paramtypes', [BugStorage_1.BugStorage])
     ], BugTracker);

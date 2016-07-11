@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {IBug, Bug} from '../models/Bug';
 import {BugStorage} from '../services/BugStorage';
 import {BugStats} from './bug-stats/BugStats.component';
+import {BugList} from './bug-list/BugList.component';
+import {BugEdit} from './bug-edit/BugEdit.component';
 
 
 @Component({
@@ -9,7 +11,7 @@ import {BugStats} from './bug-stats/BugStats.component';
 	selector : 'bug-tracker',
 	styleUrls : ['./app/bugTracker/bugTracker.style.css'],
 	providers : [BugStorage] ,
-	directives : [BugStats]
+	directives : [BugStats, BugList, BugEdit]
 	
 })
 export class BugTracker{
@@ -23,22 +25,17 @@ export class BugTracker{
 		this.bugs = this.bugStorage.getAll();
 		
 	}
-	onAddClick(txtBugName : any){
-		var bugName = txtBugName.value;
-		txtBugName.value = '';
-		this.bugs.push(this.bugStorage.addNew(bugName));
-	}
-
-	toggleBug(bug : Bug){
-		
-		this.bugStorage.toggle(bug);
-	}
 	
+	onNewBugAddedHandler(bugName : string){
+		console.log(arguments);
+		var newBug = this.bugStorage.addNew(bugName);
+		this.bugs.push(newBug);
+	}
 
-	onRemoveClosedClick(){
+	onRemoveClosedHandler(){
 		for(let i=this.bugs.length-1; i>=0; i--)
 			if (this.bugs[i].isClosed){
-				this.bugStorage.remove(this.bugs[i]);
+				//this.bugStorage.remove(this.bugs[i]);
 				this.bugs.splice(i,1);
 			}
 	}
