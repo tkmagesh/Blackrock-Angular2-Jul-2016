@@ -9,32 +9,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var Bug_1 = require('../models/Bug');
+var BugStorage_1 = require('../models/BugStorage');
+var bugStorageStat_component_1 = require('../bugStorageStat/bugStorageStat.component');
+var greeter_component_1 = require('../greeter/greeter.component');
 var BugTracker = (function () {
-    function BugTracker() {
+    function BugTracker(bugStorage) {
+        this.bugStorage = bugStorage;
         this.bugs = [];
     }
+    BugTracker.prototype.ngOnInit = function () {
+        this.bugs = this.bugStorage.getAll();
+    };
     BugTracker.prototype.onAddClick = function (txtBugName) {
         var bugName = txtBugName.value;
         txtBugName.value = '';
-        var newId = this.bugs.length > 0 ?
-            this.bugs.reduce(function (b1, b2) { return b1.id > b2.id ? b1 : b2; }).id + 1 : 1;
-        var newBug = new Bug_1.Bug(newId, bugName, false);
-        this.bugs.push(newBug);
+        this.bugs.push(this.bugStorage.addNew(bugName));
     };
     BugTracker.prototype.toggleBug = function (bug) {
         bug.toggle();
+        this.bugStorage.save(bug);
     };
     BugTracker.prototype.getClosedCount = function () {
         return this.bugs.reduce(function (result, bug) { return bug.isClosed ? ++result : result; }, 0);
+    };
+    BugTracker.prototype.onRemoveClosedClick = function () {
+        for (var i = this.bugs.length - 1; i >= 0; i--)
+            if (this.bugs[i].isClosed) {
+                this.bugStorage.remove(this.bugs[i]);
+                this.bugs.splice(i, 1);
+            }
     };
     BugTracker = __decorate([
         core_1.Component({
             templateUrl: './app/bugTracker/bugTracker.template.html',
             selector: 'bug-tracker',
-            styleUrls: ['./app/bugTracker/bugTracker.style.css']
+            styleUrls: ['./app/bugTracker/bugTracker.style.css'],
+            providers: [BugStorage_1.BugStorage],
+            directives: [greeter_component_1.Greeter, bugStorageStat_component_1.BugStat]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [BugStorage_1.BugStorage])
     ], BugTracker);
     return BugTracker;
 }());

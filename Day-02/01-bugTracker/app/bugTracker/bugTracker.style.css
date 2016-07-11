@@ -1,5 +1,5 @@
 .closed{
-	color : red;
+	color : red !important;
 	text-decoration: line-through;
 	font-style: italic;
 	font-weight: bold;
@@ -21,6 +21,7 @@ li{
 
 .bugname{
 	font-size: 18pt;
+	color : black;
 }
 .datetime{
 	font-style: italic;
