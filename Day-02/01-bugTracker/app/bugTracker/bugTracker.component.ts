@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Bug} from '../models/Bug';
+import {IBug, Bug} from '../models/Bug';
 
 @Component({
 	templateUrl : './app/bugTracker/bugTracker.template.html',
@@ -7,7 +7,7 @@ import {Bug} from '../models/Bug';
 	styleUrls : ['./app/bugTracker/bugTracker.style.css']
 })
 export class BugTracker{
-	bugs : Array<Bug> = [];
+	bugs : Array<IBug> = [];
 	onAddClick(txtBugName : any){
 		var bugName = txtBugName.value;
 		txtBugName.value = '';
@@ -19,7 +19,7 @@ export class BugTracker{
 	}
 
 	toggleBug(bug : Bug){
-		bug.isClosed = !bug.isClosed;
+		bug.toggle();
 	}
 	getClosedCount(){
 		return this.bugs.reduce((result, bug) => bug.isClosed ? ++result : result, 0);

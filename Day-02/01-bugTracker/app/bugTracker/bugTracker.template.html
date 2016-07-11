@@ -15,10 +15,11 @@
 		<div>All Clear..!!  No bugs found!!!</div>
 	</div>
 	<ol>
-		<li 
-			*ngFor="let bug of bugs" 
+		<li *ngFor="let bug of bugs">
+			<div class="bugname"
 			(click)="toggleBug(bug)"
-			[ngClass]="{closed : bug.isClosed}"
-		>{{bug | json}}</li>
+			[ngClass]="{closed : bug.isClosed}">
+		{{bug.name}}</div>
+			<div class="datetime">{{bug.createdAt}}</div>
 	</ol>
 </section>

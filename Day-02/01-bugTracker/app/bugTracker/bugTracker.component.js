@@ -23,7 +23,7 @@ var BugTracker = (function () {
         this.bugs.push(newBug);
     };
     BugTracker.prototype.toggleBug = function (bug) {
-        bug.isClosed = !bug.isClosed;
+        bug.toggle();
     };
     BugTracker.prototype.getClosedCount = function () {
         return this.bugs.reduce(function (result, bug) { return bug.isClosed ? ++result : result; }, 0);

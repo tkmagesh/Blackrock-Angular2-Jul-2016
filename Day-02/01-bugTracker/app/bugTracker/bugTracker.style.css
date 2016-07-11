@@ -5,6 +5,24 @@
 	font-weight: bold;
 }
 
+ol{
+	list-style: none;
+	width: 400px;
+	-webkit-padding-start: 0px;
+}
 li{
+	border : 1px solid gray;
+	background-color: #e7e7e7;
+	margin-bottom: 5px;
+	padding: 5px;
+	border-radius: 5px;
 	cursor: pointer;
+}
+
+.bugname{
+	font-size: 18pt;
+}
+.datetime{
+	font-style: italic;
+	font-size: small;
 }
