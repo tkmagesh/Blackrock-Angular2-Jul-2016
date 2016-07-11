@@ -9,9 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var BugStorage_1 = require('../models/BugStorage');
-var bugStorageStat_component_1 = require('../bugStorageStat/bugStorageStat.component');
-var greeter_component_1 = require('../greeter/greeter.component');
+var BugStorage_1 = require('../services/BugStorage');
 var BugTracker = (function () {
     function BugTracker(bugStorage) {
         this.bugStorage = bugStorage;
@@ -45,7 +43,7 @@ var BugTracker = (function () {
             selector: 'bug-tracker',
             styleUrls: ['./app/bugTracker/bugTracker.style.css'],
             providers: [BugStorage_1.BugStorage],
-            directives: [greeter_component_1.Greeter, bugStorageStat_component_1.BugStat]
+            directives: []
         }), 
         __metadata('design:paramtypes', [BugStorage_1.BugStorage])
     ], BugTracker);

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var BugStorage_1 = require('../models/BugStorage');
+var BugStorage_1 = require('../services/BugStorage');
 var BugStat = (function () {
     function BugStat(bugStorage) {
         this.bugStorage = bugStorage;

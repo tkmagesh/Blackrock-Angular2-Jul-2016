@@ -1,16 +1,15 @@
 import {Component} from '@angular/core';
 import {IBug, Bug} from '../models/Bug';
-import {BugStorage} from '../models/BugStorage';
-import {BugStat} from '../bugStorageStat/bugStorageStat.component';
-import {Greeter} from '../greeter/greeter.component';
+import {BugStorage} from '../services/BugStorage';
+
 
 @Component({
 	templateUrl : './app/bugTracker/bugTracker.template.html',
 	selector : 'bug-tracker',
 	styleUrls : ['./app/bugTracker/bugTracker.style.css'],
 	providers : [BugStorage] ,
-	directives : [Greeter, BugStat]
-	//directives : [BugStorageStat]
+	directives : []
+	
 })
 export class BugTracker{
 	bugs : Array<IBug> = [];

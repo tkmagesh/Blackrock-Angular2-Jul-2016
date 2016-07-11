@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {BugStorage} from '../models/BugStorage';
+import {BugStorage} from '../services/BugStorage';
 
 @Component({
 	selector : 'bug-stat',

@@ -1,12 +1,11 @@
-import {Bug} from './Bug';
-import {Dummy} from './Dummy';
+import {Bug} from '../models/Bug';
 import {Inject, Injectable} from '@angular/core';
 
 
 export class BugStorage{
 	maxBugId : number = 0;
 
-	constructor(@Inject(Dummy) public dummy : Dummy){
+	constructor(){
 
 	}
 	getAll() : Array<Bug> {
