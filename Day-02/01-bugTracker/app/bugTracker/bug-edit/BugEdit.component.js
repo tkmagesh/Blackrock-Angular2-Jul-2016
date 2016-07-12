@@ -21,7 +21,7 @@ var BugEdit = (function () {
         //this.bugs.push(this.bugStorage.addNew(bugName));
     };
     BugEdit.prototype.onRemoveClosedClick = function () {
-        this.onRemoveClosed.emit();
+        this.onRemoveClosed.emit(null);
     };
     __decorate([
         core_1.Output(), 

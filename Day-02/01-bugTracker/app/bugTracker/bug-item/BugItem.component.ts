@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {IBug} from '../../models/Bug';
 import {BugStorage} from '../../services/BugStorage';
+import {Elapsed} from '../../pipes/Elapsed';
 
 @Component({
 	template : `<div class="bugname"
@@ -9,8 +10,9 @@ import {BugStorage} from '../../services/BugStorage';
 
 							{{bug.name}}
 						</div>
-						<div class="datetime">{{bug.createdAt | date:'dd-MMM-yyyy'}}</div>`,
+						<div class="datetime">{{bug.createdAt | elapsed}}</div>`,
 	selector : 'bug-item',
+	pipes : [Elapsed]
 
 })
 export class BugItem{

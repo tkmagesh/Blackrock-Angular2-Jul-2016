@@ -9,24 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var toClosedCount_1 = require('../../pipes/toClosedCount');
-var BugStats = (function () {
-    function BugStats() {
-        this.list = [];
+var ToClosedCount = (function () {
+    function ToClosedCount() {
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], BugStats.prototype, "list", void 0);
-    BugStats = __decorate([
-        core_1.Component({
-            selector: 'bug-stats',
-            template: "<section class=\"stats\">\n\t<span class=\"closed\">{{list | toClosedCount}}</span>\n\t<span>/</span>\n\t<span>{{list.length}}</span>\n</section>",
-            pipes: [toClosedCount_1.ToClosedCount]
+    ToClosedCount.prototype.transform = function (bugs) {
+        return bugs.reduce(function (result, bug) { return bug.isClosed ? ++result : result; }, 0);
+    };
+    ToClosedCount = __decorate([
+        core_1.Pipe({
+            name: 'toClosedCount',
+            pure: false
         }), 
         __metadata('design:paramtypes', [])
-    ], BugStats);
-    return BugStats;
+    ], ToClosedCount);
+    return ToClosedCount;
 }());
-exports.BugStats = BugStats;
-//# sourceMappingURL=BugStats.component.js.map
+exports.ToClosedCount = ToClosedCount;
+//# sourceMappingURL=toClosedCount.js.map

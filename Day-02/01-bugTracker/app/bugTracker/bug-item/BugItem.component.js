@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var BugStorage_1 = require('../../services/BugStorage');
+var Elapsed_1 = require('../../pipes/Elapsed');
 var BugItem = (function () {
     function BugItem(bugStorage) {
         this.bugStorage = bugStorage;
@@ -23,8 +24,9 @@ var BugItem = (function () {
     ], BugItem.prototype, "bug", void 0);
     BugItem = __decorate([
         core_1.Component({
-            template: "<div class=\"bugname\"\n\t\t\t\t\t\t\t(click)=\"toggleBug(bug)\"\n\t\t\t\t\t\t\t[ngClass]=\"{closed : bug.isClosed}\">\n\n\t\t\t\t\t\t\t{{bug.name}}\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"datetime\">{{bug.createdAt | date:'dd-MMM-yyyy'}}</div>",
+            template: "<div class=\"bugname\"\n\t\t\t\t\t\t\t(click)=\"toggleBug(bug)\"\n\t\t\t\t\t\t\t[ngClass]=\"{closed : bug.isClosed}\">\n\n\t\t\t\t\t\t\t{{bug.name}}\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"datetime\">{{bug.createdAt | elapsed}}</div>",
             selector: 'bug-item',
+            pipes: [Elapsed_1.Elapsed]
         }), 
         __metadata('design:paramtypes', [BugStorage_1.BugStorage])
     ], BugItem);

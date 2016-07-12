@@ -11,7 +11,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class BugEdit{
 	@Output() onNewBugAdd : EventEmitter<string> = new EventEmitter<string>();
-	@Output() onRemoveClosed : EventEmitter = new EventEmitter();
+	@Output() onRemoveClosed : EventEmitter<any> = new EventEmitter();
 	onAddClick(txtBugName : any){
 		var bugName = txtBugName.value;
 		txtBugName.value = '';
@@ -20,7 +20,7 @@ export class BugEdit{
 	}
 	
 	onRemoveClosedClick(){
-		this.onRemoveClosed.emit();
+		this.onRemoveClosed.emit(null);
 	}
 
 	

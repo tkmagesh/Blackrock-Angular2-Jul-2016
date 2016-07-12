@@ -1,18 +1,16 @@
 import {Component, Input} from '@angular/core';
+import {ToClosedCount} from '../../pipes/toClosedCount';
 
 @Component({
 	selector : 'bug-stats',
 	template : `<section class="stats">
-	<span class="closed">{{getClosedCount()}}</span>
+	<span class="closed">{{list | toClosedCount}}</span>
 	<span>/</span>
 	<span>{{list.length}}</span>
-</section>`
+</section>`,
+	pipes : [ToClosedCount]
 })
 export class BugStats{
 	@Input()
 	list :Array<any> =  [];
-	
-	getClosedCount(){
-		return this.list.reduce((result, bug) => bug.isClosed ? ++result : result, 0);
-	}
 }
